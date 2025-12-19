@@ -477,6 +477,8 @@ def initialize_session_state():
         st.session_state.recommendations = None
     if 'summary' not in st.session_state:
         st.session_state.summary = None
+    if 'calculated' not in st.session_state:
+        st.session_state.calculated = False
 
 # ============================================
 # RESOURCE LOADING (CACHED)
@@ -964,16 +966,32 @@ def render_header():
     """
     Render the main application header with title and tagline.
     
-    Design: Centered layout with gradient text and descriptive subtitle
+    Design: Clean, professional, exam-ready centered layout with proper spacing
     """
     st.markdown("""
-        <div style="text-align: center; padding: 2rem 0 1rem 0;">
-            <div class="main-header">🌱 AI-Based Smart Carbon Footprint Calculator</div>
-            <div class="sub-header" style="font-size: 1.3rem; margin-top: 0.5rem;">
+        <div style="text-align: center; padding: 2.5rem 0 2rem 0;">
+            <!-- Main Title -->
+            <div class="main-header" style="margin-bottom: 1.5rem;">
+                🌱 AI-Based Smart Carbon Footprint Calculator
+            </div>
+            
+            <!-- Subtitle -->
+            <div class="sub-header" style="font-size: 1.3rem; 
+                                           color: #2e7d32; 
+                                           margin-bottom: 1rem;
+                                           font-weight: 600;">
                 Smart Carbon Footprint & Green Habit Assistant
             </div>
-            <p style="color: #78909c; font-size: 0.95rem; margin-top: 0.5rem;">
-                Powered by Machine Learning | Track • Analyze • Reduce
+            
+            <!-- Description -->
+            <p style="color: #78909c; 
+                      font-size: 1rem; 
+                      margin: 0;
+                      line-height: 1.6;
+                      max-width: 700px;
+                      margin-left: auto;
+                      margin-right: auto;">
+                Powered by Machine Learning • Track • Analyze • Reduce Your Environmental Impact
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -1429,11 +1447,13 @@ def main():
     # ============================================
     render_header()
     
-    st.markdown("<br>", unsafe_allow_html=True)
+    # Clear spacing after header
+    st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
     
     render_carbon_footprint_explainer()
     
-    st.markdown("<br>", unsafe_allow_html=True)
+    # Spacing before disclaimer
+    st.markdown("<div style='margin: 1.5rem 0;'></div>", unsafe_allow_html=True)
     
     render_disclaimer()
     
@@ -1746,6 +1766,9 @@ def main():
     
     # Process calculation
     if calculate_button:
+        # Set calculated flag to true
+        st.session_state.calculated = True
+        
         with st.spinner("🔄 Analyzing your carbon footprint..."):
             # Generate recommendations
             result = engine.generate_recommendations(
@@ -2105,7 +2128,8 @@ def main():
             
             st.markdown("</div>", unsafe_allow_html=True)
     
-    else:
+    # Show welcome/intro content only if NOT calculated yet
+    if not st.session_state.calculated:
         # Welcome message with better styling
         st.markdown("""
             <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
