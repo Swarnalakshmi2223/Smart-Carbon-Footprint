@@ -1,3 +1,4 @@
+DEPLOYMENT LINK:https://smart-carbon-footprint-ffndam8dsxs22yakekbbvm.streamlit.app/
 # 🌱 AI-Based Smart Carbon Footprint & Green Habit Recommendation System
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
