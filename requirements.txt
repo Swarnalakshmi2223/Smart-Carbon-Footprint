@@ -1,0 +1,19 @@
+# Smart Carbon Footprint Calculator - Python Dependencies
+# Install all dependencies: pip install -r requirements.txt
+
+# Web Framework
+streamlit>=1.46.1
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualization
+plotly>=6.2.0
+
+# Machine Learning
+scikit-learn>=1.3.0
+tensorflow>=2.13.0
+
+# Additional utilities
+joblib>=1.3.0
