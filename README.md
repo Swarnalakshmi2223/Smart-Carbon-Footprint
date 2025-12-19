@@ -1,4 +1,4 @@
-DEPLOYMENT LINK:https://smart-carbon-footprint-ffndam8dsxs22yakekbbvm.streamlit.app/
+
 # 🌱 AI-Based Smart Carbon Footprint & Green Habit Recommendation System
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
@@ -7,6 +7,7 @@ DEPLOYMENT LINK:https://smart-carbon-footprint-ffndam8dsxs22yakekbbvm.streamlit.
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 An AI-powered machine learning system that helps individuals track their carbon footprint, predict future emissions, and receive personalized recommendations for sustainable living. Built with advanced ML algorithms including Linear Regression, Random Forest, and LSTM neural networks.
+DEPLOYMENT LINK:https://smart-carbon-footprint-ffndam8dsxs22yakekbbvm.streamlit.app/
 
 ---
 
