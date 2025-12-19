@@ -1793,7 +1793,7 @@ def main():
                             padding: 2.5rem;
                             border-radius: 20px;
                             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-                            margin: 2rem 0;
+                            margin-bottom: 2rem;
                             border: 1px solid rgba(46, 125, 50, 0.1);">
                 
                 <div style="text-align: center; margin-bottom: 2rem;">
@@ -1863,69 +1863,82 @@ def main():
                     <div style="color: #388e3c; font-size: 1.2rem; font-weight: 700;">{reduction_pct:.1f}% Reduction Possible</div>
                 </div>
             </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
-        # Top Contributor Insight Box
-        top_contributor = summary['top_contributor'].replace('_', ' ').title()
-        st.markdown(f"""
-            <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); 
-                        padding: 1.5rem; border-radius: 12px; border-left: 5px solid #1976d2;
-                        box-shadow: 0 4px 12px rgba(25, 118, 210, 0.1); margin: 2rem 0;">
-                <h4 style="color: #0d47a1; margin: 0 0 0.5rem 0;">📌 Key Insight</h4>
-                <p style="color: #1565c0; margin: 0; font-size: 1.05rem;">
-                    Your highest emissions come from <strong>{top_contributor}</strong>. 
-                    Focus on this area for maximum impact!
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("---")
+        # Top Contributor Insight Box in professional container
+        with st.container():
+            top_contributor = summary['top_contributor'].replace('_', ' ').title()
+            st.markdown(f"""
+                <div style="background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+                            padding: 2rem;
+                            border-radius: 20px;
+                            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                            margin-bottom: 2rem;
+                            border: 1px solid rgba(46, 125, 50, 0.1);">
+                    <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); 
+                                padding: 1.5rem; border-radius: 12px; border-left: 5px solid #1976d2;
+                                box-shadow: 0 4px 12px rgba(25, 118, 210, 0.1);">
+                        <h4 style="color: #0d47a1; margin: 0 0 0.5rem 0;">📌 Key Insight</h4>
+                        <p style="color: #1565c0; margin: 0; font-size: 1.05rem;">
+                            Your highest emissions come from <strong>{top_contributor}</strong>. 
+                            Focus on this area for maximum impact!
+                        </p>
+                    </div>
+                </div>
+            """, unsafe_allow_html=True)
         
         # ============================================
         # SECTION 3B: CHARTS & VISUALIZATIONS
         # ============================================
-        st.markdown("""
-            <div style="text-align: center; padding: 1rem 0;">
-                <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">
-                    📈 Visual Analysis
-                </h2>
-                <p style="color: #78909c; font-size: 1rem;">
-                    Interactive charts to help you understand your carbon footprint
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Charts Row 1: Emission Sources and Eco Score
-        col1, col2 = st.columns([1.2, 1])
-        
-        with col1:
-            breakdown_fig = create_emission_breakdown_chart(summary['footprint_breakdown'])
-            st.plotly_chart(breakdown_fig, use_container_width=True, config={'displayModeBar': False})
-        
-        with col2:
-            gauge_fig = create_gauge_chart(summary['eco_score'])
-            st.plotly_chart(gauge_fig, use_container_width=True, config={'displayModeBar': False})
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Charts Row 2: Monthly Trend and Savings
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            trend_fig = create_monthly_trend_chart(
-                summary['current_footprint_kg_co2'],
-                summary['potential_footprint_kg_co2']
-            )
-            st.plotly_chart(trend_fig, use_container_width=True, config={'displayModeBar': False})
-        
-        with col2:
-            savings_fig = create_savings_chart(
-                summary['current_footprint_kg_co2'],
-                summary['total_potential_savings_kg_co2']
-            )
-            st.plotly_chart(savings_fig, use_container_width=True, config={'displayModeBar': False})
+        with st.container():
+            st.markdown("""
+                <div style="background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+                            padding: 2.5rem;
+                            border-radius: 20px;
+                            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                            margin-bottom: 2rem;
+                            border: 1px solid rgba(46, 125, 50, 0.1);">
+                    <div style="text-align: center; padding-bottom: 1.5rem;">
+                        <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">
+                            📈 Visual Analysis
+                        </h2>
+                        <p style="color: #78909c; font-size: 1rem;">
+                            Interactive charts to help you understand your carbon footprint
+                        </p>
+                    </div>
+            """, unsafe_allow_html=True)
+            
+            # Charts Row 1: Emission Sources and Eco Score
+            col1, col2 = st.columns([1.2, 1])
+            
+            with col1:
+                breakdown_fig = create_emission_breakdown_chart(summary['footprint_breakdown'])
+                st.plotly_chart(breakdown_fig, use_container_width=True, config={'displayModeBar': False})
+            
+            with col2:
+                gauge_fig = create_gauge_chart(summary['eco_score'])
+                st.plotly_chart(gauge_fig, use_container_width=True, config={'displayModeBar': False})
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            # Charts Row 2: Monthly Trend and Savings
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                trend_fig = create_monthly_trend_chart(
+                    summary['current_footprint_kg_co2'],
+                    summary['potential_footprint_kg_co2']
+                )
+                st.plotly_chart(trend_fig, use_container_width=True, config={'displayModeBar': False})
+            
+            with col2:
+                savings_fig = create_savings_chart(
+                    summary['current_footprint_kg_co2'],
+                    summary['total_potential_savings_kg_co2']
+                )
+                st.plotly_chart(savings_fig, use_container_width=True, config={'displayModeBar': False})
+            
+            st.markdown("</div>", unsafe_allow_html=True)
         
         st.markdown("---")
         
@@ -1969,117 +1982,127 @@ def main():
                 </div>
             """, unsafe_allow_html=True)
         
-        st.markdown("---")
-        
         # ============================================
         # SECTION 3C: GREEN RECOMMENDATIONS
         # ============================================
-        st.markdown("""
-            <div style="text-align: center; padding: 1rem 0;">
-                <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">
-                    💡 Personalized Green Habit Recommendations
-                </h2>
-                <p style="color: #78909c; font-size: 1rem;">
-                    Actionable steps to reduce your carbon footprint with quantified impact
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Filter Controls
-        col1, col2, col3 = st.columns([2, 2, 1])
-        with col1:
-            filter_priority = st.multiselect(
-                "🎯 Filter by priority:",
-                options=['High', 'Medium', 'Low'],
-                default=['High', 'Medium', 'Low']
-            )
-        with col2:
+        with st.container():
+            st.markdown("""
+                <div style="background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+                            padding: 2.5rem;
+                            border-radius: 20px;
+                            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                            margin-bottom: 2rem;
+                            border: 1px solid rgba(46, 125, 50, 0.1);">
+                    <div style="text-align: center; padding-bottom: 1.5rem;">
+                        <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">
+                            💡 Personalized Green Habit Recommendations
+                        </h2>
+                        <p style="color: #78909c; font-size: 1rem;">
+                            Actionable steps to reduce your carbon footprint with quantified impact
+                        </p>
+                    </div>
+            """, unsafe_allow_html=True)
+            
+            # Filter Controls
+            col1, col2, col3 = st.columns([2, 2, 1])
+            with col1:
+                filter_priority = st.multiselect(
+                    "🎯 Filter by priority:",
+                    options=['High', 'Medium', 'Low'],
+                    default=['High', 'Medium', 'Low']
+                )
+            with col2:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.caption("Select priorities to filter recommendations")
+            with col3:
+                show_all = st.checkbox("Show all", value=False)
+            
             st.markdown("<br>", unsafe_allow_html=True)
-            st.caption("Select priorities to filter recommendations")
-        with col3:
-            show_all = st.checkbox("Show all", value=False)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Filter and display recommendations
-        filtered_recs = [
-            rec for rec in st.session_state.recommendations
-            if rec.get('priority') in filter_priority or rec.get('impact') == 'Positive'
-        ]
-        
-        if not show_all:
-            filtered_recs = filtered_recs[:10]
-        
-        if filtered_recs:
-            display_recommendations(filtered_recs)
-        else:
-            st.info("No recommendations match your selected filters. Try adjusting the priority filter.")
-        
-        st.markdown("---")
+            
+            # Filter and display recommendations
+            filtered_recs = [
+                rec for rec in st.session_state.recommendations
+                if rec.get('priority') in filter_priority or rec.get('impact') == 'Positive'
+            ]
+            
+            if not show_all:
+                filtered_recs = filtered_recs[:10]
+            
+            if filtered_recs:
+                display_recommendations(filtered_recs)
+            else:
+                st.info("No recommendations match your selected filters. Try adjusting the priority filter.")
+            
+            st.markdown("</div>", unsafe_allow_html=True)
         
         # ============================================
         # SECTION 3D: ENVIRONMENTAL IMPACT METRICS
         # ============================================
-        st.markdown("""
-            <div style="text-align: center; padding: 1rem 0;">
-                <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">
-                    🌍 Your Environmental Impact
-                </h2>
-                <p style="color: #78909c; font-size: 1rem;">
-                    See your potential contribution to a greener planet
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            trees_equivalent = summary['total_potential_savings_kg_co2'] / 21
+        with st.container():
             st.markdown("""
-                <div style="background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%); 
-                            padding: 2rem; border-radius: 12px; text-align: center;
-                            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.1);">
+                <div style="background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+                            padding: 2.5rem;
+                            border-radius: 20px;
+                            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+                            margin-bottom: 2rem;
+                            border: 1px solid rgba(46, 125, 50, 0.1);">
+                    <div style="text-align: center; padding-bottom: 1.5rem;">
+                        <h2 style="color: #2e7d32; font-size: 2rem; margin-bottom: 0.5rem;">
+                            🌍 Your Environmental Impact
+                        </h2>
+                        <p style="color: #78909c; font-size: 1rem;">
+                            See your potential contribution to a greener planet
+                        </p>
+                    </div>
             """, unsafe_allow_html=True)
-            st.metric(
-                label="🌳 Trees Equivalent",
-                value=f"{trees_equivalent:.1f}",
-                help="Number of trees needed to offset your potential savings annually"
-            )
-            st.caption("Trees absorbing CO₂ for one year")
-            st.markdown("</div>", unsafe_allow_html=True)
-        
-        with col2:
-            km_saved = summary['total_potential_savings_kg_co2'] / 0.12 / 12
-            st.markdown("""
-                <div style="background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%); 
-                            padding: 2rem; border-radius: 12px; text-align: center;
-                            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);">
-            """, unsafe_allow_html=True)
-            st.metric(
-                label="🚗 Daily Driving Saved",
-                value=f"{km_saved:.1f} km",
-                help="Equivalent daily car travel distance saved"
-            )
-            st.caption("Kilometers not driven per day")
-            st.markdown("</div>", unsafe_allow_html=True)
-        
-        with col3:
-            yearly_savings = summary['total_potential_savings_kg_co2'] * 12
-            st.markdown("""
-                <div style="background: linear-gradient(135deg, #ffffff 0%, #fff9c4 100%); 
-                            padding: 2rem; border-radius: 12px; text-align: center;
-                            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.1);">
-            """, unsafe_allow_html=True)
-            st.metric(
-                label="📅 Annual Savings",
-                value=f"{yearly_savings:.0f} kg",
-                help="Your potential annual CO₂ savings"
-            )
-            st.caption("Total CO₂ saved per year")
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                trees_equivalent = summary['total_potential_savings_kg_co2'] / 21
+                st.markdown("""
+                    <div style="background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%); 
+                                padding: 2rem; border-radius: 12px; text-align: center;
+                                box-shadow: 0 4px 12px rgba(76, 175, 80, 0.1);">
+                """, unsafe_allow_html=True)
+                st.metric(
+                    label="🌳 Trees Equivalent",
+                    value=f"{trees_equivalent:.1f}",
+                    help="Number of trees needed to offset your potential savings annually"
+                )
+                st.caption("Trees absorbing CO₂ for one year")
+                st.markdown("</div>", unsafe_allow_html=True)
+            
+            with col2:
+                km_saved = summary['total_potential_savings_kg_co2'] / 0.12 / 12
+                st.markdown("""
+                    <div style="background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%); 
+                                padding: 2rem; border-radius: 12px; text-align: center;
+                                box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);">
+                """, unsafe_allow_html=True)
+                st.metric(
+                    label="🚗 Daily Driving Saved",
+                    value=f"{km_saved:.1f} km",
+                    help="Equivalent daily car travel distance saved"
+                )
+                st.caption("Kilometers not driven per day")
+                st.markdown("</div>", unsafe_allow_html=True)
+            
+            with col3:
+                yearly_savings = summary['total_potential_savings_kg_co2'] * 12
+                st.markdown("""
+                    <div style="background: linear-gradient(135deg, #ffffff 0%, #fff9c4 100%); 
+                                padding: 2rem; border-radius: 12px; text-align: center;
+                                box-shadow: 0 4px 12px rgba(255, 193, 7, 0.1);">
+                """, unsafe_allow_html=True)
+                st.metric(
+                    label="📅 Annual Savings",
+                    value=f"{yearly_savings:.0f} kg",
+                    help="Your potential annual CO₂ savings"
+                )
+                st.caption("Total CO₂ saved per year")
+                st.markdown("</div>", unsafe_allow_html=True)
+            
             st.markdown("</div>", unsafe_allow_html=True)
     
     else:
