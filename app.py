@@ -269,28 +269,28 @@ def render_sidebar_inputs():
     st.sidebar.markdown("<p style='text-align:center; color:#546e7a; font-size:0.9rem;'>Enter your monthly habits</p>", unsafe_allow_html=True)
     
     # Transport
-    st.sidebar.markdown("### 🚗 Transportation")
+    st.sidebar.markdown("<h3 style='color:#1b5e20; font-weight:700;'>🚗 Transportation</h3>", unsafe_allow_html=True)
     transport_km = st.sidebar.number_input("Distance by car (km/month)", 0, 5000, 300, 50)
     st.sidebar.markdown("---")
     
     # Electricity
-    st.sidebar.markdown("### ⚡ Electricity")
+    st.sidebar.markdown("<h3 style='color:#1b5e20; font-weight:700;'>⚡ Electricity</h3>", unsafe_allow_html=True)
     electricity_kwh = st.sidebar.number_input("Electricity (kWh/month)", 0, 2000, 200, 10)
     st.sidebar.markdown("---")
     
     # Water
-    st.sidebar.markdown("### 💧 Water")
+    st.sidebar.markdown("<h3 style='color:#1b5e20; font-weight:700;'>💧 Water</h3>", unsafe_allow_html=True)
     water_liters = st.sidebar.slider("Daily water (liters)", 0, 500, 150, 10)
     st.sidebar.markdown("---")
     
     # Diet
-    st.sidebar.markdown("### 🍽️ Diet")
+    st.sidebar.markdown("<h3 style='color:#1b5e20; font-weight:700;'>🍽️ Diet</h3>", unsafe_allow_html=True)
     diet_type = st.sidebar.selectbox("Diet type", ['veg', 'mixed', 'non-veg'],
                                       format_func=lambda x: {'veg':'🌱 Vegetarian','mixed':'🍴 Mixed','non-veg':'🥩 Non-Veg'}[x])
     st.sidebar.markdown("---")
     
     # Waste
-    st.sidebar.markdown("### ♻️ Waste")
+    st.sidebar.markdown("<h3 style='color:#1b5e20; font-weight:700;'>♻️ Waste</h3>", unsafe_allow_html=True)
     waste_kg = st.sidebar.slider("Weekly waste (kg)", 0.0, 30.0, 8.0, 0.5)
     
     return transport_km, electricity_kwh, water_liters, diet_type, waste_kg
